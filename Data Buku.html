@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Input Data Buku</title>
+    <style>
+        body {
+            background-color: aqua;
+        }
+        
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 50px;
+        }
+        
+        input[type="text"],
+        select {
+            margin: 10px;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            box-shadow: 0 0 5px gray;
+            width: 300px;
+        }
+        
+        input[type="submit"] {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        input[type="submit"]:hover {
+            background-color: #3e8e41;
+        }
+        
+        .a {
+            text-align: center;
+        }
+        
+        .error {
+            color: red;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <marquee> "SELAMAT DATANG DI PERPUSTAKAAN PNL"
+    </marquee>
+    <form id="form-buku">
+        <label for="judul">Judul Buku:</label>
+        <input type="text" id="judul" name="judul" required>
+
+        <label for="penulis">Penulis:</label>
+        <input type="text" id="penulis" name="penulis" required>
+
+        <label for="penerbit">Penerbit:</label>
+        <input type="text" id="penerbit" name="penerbit" required>
+
+        <label for="tahun_terbit">Tahun Terbit:</label>
+        <input type="text" id="tahun_terbit" name="tahun_terbit" required>
+
+        <label for="jenis">Jenis Buku:</label>
+        <select id="jenis" name="jenis" required>
+			<option value="">Pilih jenis buku</option>
+			<option value="novel">Novel</option>
+			<option value="komik">Komik</option>
+			<option value="pelajaran">Buku Pelajaran</option>
+			<option value="lainnya">Lainnya</option>
+		</select>
+
+        <input type="submit" value="Simpan">
+    </form>
+
+    <script>
+        const formBuku = document.getElementById('form-buku');
+        const errorElement = document.createElement('div');
+
+        formBuku.addEventListener('submit', (e) => {
+            const judulInput = document.getElementById('judul');
+            const penulisInput = document.getElementById('penulis');
+            const penerbitInput = document.getElementById('penerbit');
+            const tahunTerbitInput = document.getElementById('tahun_terbit');
+            const jenisInput = document.getElementById('jenis');
+
+            if (!judulInput.value || !penulisInput.value || !penerbitInput.value || !tahunTerbitInput.value || !jenisInput.value) {
+                e.preventDefault();
+
+                errorElement.innerHTML = 'Semua data harus diisi';
+                formBuku.appendChild(errorElement);
+            }
+        });
+    </script>
+    <br><a href=" perpus.html ">Kembali ke Beranda</a>
+</body>
+
+</html>

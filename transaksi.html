@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Input Transaksi Peminjaman Buku</title>
+    <style>
+        body {
+            background-color: aqua;
+        }
+        
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 50px;
+        }
+        
+        input[type="text"],
+        select {
+            margin: 10px;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            box-shadow: 0 0 5px gray;
+            width: 300px;
+        }
+        
+        input[type="date"] {
+            margin: 10px;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            box-shadow: 0 0 5px gray;
+            width: 300px;
+        }
+        
+        input[type="submit"] {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        input[type="submit"]:hover {
+            background-color: #3e8e41;
+        }
+        
+        .error {
+            color: red;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <marquee> "SELAMAT DATANG DI PERPUSTAKAAN PNL"
+    </marquee>
+    <form id="form-transaksi" onsubmit="return validateForm()">
+        <label for="nama">Nama Peminjam:</label>
+        <input type="text" id="nama" name="nama">
+
+        <label for="buku">Judul Buku:</label>
+        <input type="text" id="buku" name="buku">
+
+        <label for="tgl_pinjam">Tanggal Pinjam:</label>
+        <input type="date" id="tgl_pinjam" name="tgl_pinjam">
+
+        <label for="tgl_kembali">Tanggal Kembali:</label>
+        <input type="date" id="tgl_kembali" name="tgl_kembali">
+
+        <input type="submit" value="Simpan">
+    </form>
+
+    <script>
+        function validateForm() {
+            let nama = document.getElementById("nama").value;
+            let buku = document.getElementById("buku").value;
+            let tgl_pinjam = document.getElementById("tgl_pinjam").value;
+            let tgl_kembali = document.getElementById("tgl_kembali").value;
+
+            if (nama == "" || buku == "" || tgl_pinjam == "" || tgl_kembali == "") {
+                alert("Semua field harus diisi!");
+                return false;
+            }
+            return true;
+        }
+
+        document.getElementById("form-transaksi").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            if (validateForm()) {
+                // Kirim data ke server
+                let data = new FormData(document.getElementById("form-transaksi"));
+                fetch("url-server", {
+                        method: "POST",
+                        body: data
+                    })
+                    .then(response => response.text())
+                    .then(result => {
+                        alert(result);
+                    })
+                    .catch(error => {
+                        alert("Terjadi kesalahan: " + error);
+                    });
+            }
+        });
+    </script>
+    <br><a href="perpus.html">Kembali ke Beranda</a>
+</body>
+
+</html>
